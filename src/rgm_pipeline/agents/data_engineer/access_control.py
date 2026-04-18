@@ -12,7 +12,7 @@ from typing import Optional
 import pandas as pd
 from loguru import logger
 
-from config.settings import ACCESS_ROLES
+from rgm_pipeline.config.settings import ACCESS_ROLES
 
 
 # ---------------------------------------------------------------------------

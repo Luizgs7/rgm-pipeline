@@ -2,7 +2,7 @@
 
 import pytest
 
-from agents.data_engineer.access_control import (
+from rgm_pipeline.agents.data_engineer.access_control import (
     AccessControlService,
     AuthenticationError,
     User,

@@ -14,7 +14,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import LabelEncoder
 from loguru import logger
 
-from config.settings import DB_PATH, PROCESSED_DIR
+from rgm_pipeline.config.settings import DB_PATH, PROCESSED_DIR
 
 
 @dataclass

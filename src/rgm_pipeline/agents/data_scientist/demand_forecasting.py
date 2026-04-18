@@ -15,7 +15,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import mean_absolute_percentage_error
 from loguru import logger
 
-from config.settings import DB_PATH, PROCESSED_DIR, MOCK_CONFIG
+from rgm_pipeline.config.settings import DB_PATH, PROCESSED_DIR, MOCK_CONFIG
 
 
 @dataclass

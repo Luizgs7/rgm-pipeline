@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 
-from config.settings import DB_PATH, PROCESSED_DIR
+from rgm_pipeline.config.settings import DB_PATH, PROCESSED_DIR
 
 try:
     from evidently import ColumnMapping

@@ -12,11 +12,11 @@ Pré-requisito: run_module1.py deve ter sido executado (banco SQLite disponível
 
 from loguru import logger
 
-from agents.data_scientist.causal_baseline import CausalBaselineEstimator
-from agents.data_scientist.demand_forecasting import DemandForecaster
-from agents.data_scientist.optimizer import CampaignOptimizer
-from agents.data_scientist.explainability import CampaignExplainer
-from config.settings import DB_PATH
+from rgm_pipeline.agents.data_scientist.causal_baseline import CausalBaselineEstimator
+from rgm_pipeline.agents.data_scientist.demand_forecasting import DemandForecaster
+from rgm_pipeline.agents.data_scientist.optimizer import CampaignOptimizer
+from rgm_pipeline.agents.data_scientist.explainability import CampaignExplainer
+from rgm_pipeline.config.settings import DB_PATH
 
 
 def main() -> None:

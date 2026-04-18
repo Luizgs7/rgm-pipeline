@@ -13,7 +13,7 @@ import seaborn as sns
 
 warnings.filterwarnings("ignore")
 
-from config.settings import DB_PATH, PROCESSED_DIR
+from rgm_pipeline.config.settings import DB_PATH, PROCESSED_DIR
 
 # ── Paleta e estilo ──────────────────────────────────────────────────────────
 COLORS = {

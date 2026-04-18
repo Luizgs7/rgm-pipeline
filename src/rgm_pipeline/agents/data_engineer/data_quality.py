@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 
-from config.settings import DQ_CONFIG
+from rgm_pipeline.config.settings import DQ_CONFIG
 
 
 # ---------------------------------------------------------------------------

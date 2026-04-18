@@ -4,14 +4,14 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from agents.data_scientist.demand_forecasting import DemandForecaster
+from rgm_pipeline.agents.data_scientist.demand_forecasting import DemandForecaster
 
 
 @pytest.fixture(scope="session")
 def trained_forecaster(sample_transactions, tmp_path_factory):
     """Treina o forecaster uma vez na sessão usando as transações de fixture."""
     processed = tmp_path_factory.mktemp("forecast_processed")
-    import agents.data_scientist.demand_forecasting as mod
+    import rgm_pipeline.agents.data_scientist.demand_forecasting as mod
     original = mod.PROCESSED_DIR
     mod.PROCESSED_DIR = processed
 

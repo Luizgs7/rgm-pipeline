@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from agents.data_engineer.mock_generator import MockDataGenerator
+from rgm_pipeline.agents.data_engineer.mock_generator import MockDataGenerator
 
 
 # ---------------------------------------------------------------------------
@@ -18,7 +18,7 @@ from agents.data_engineer.mock_generator import MockDataGenerator
 @pytest.fixture(scope="session")
 def small_generator() -> MockDataGenerator:
     """Gerador com seed fixo e tamanho reduzido."""
-    import config.settings as s
+    import rgm_pipeline.config.settings as s
     # Sobrescreve config temporariamente para testes rápidos
     original = s.MOCK_CONFIG.copy()
     s.MOCK_CONFIG.update({"n_products": 5, "n_stores": 3, "n_campaigns": 10})
@@ -143,12 +143,12 @@ def temp_db(
 @pytest.fixture()
 def patch_db_path(temp_db, monkeypatch):
     """Redireciona DB_PATH global para o banco de teste."""
-    import config.settings as s
+    import rgm_pipeline.config.settings as s
     monkeypatch.setattr(s, "DB_PATH", temp_db)
     # Também patcha nos módulos que já importaram DB_PATH
-    import agents.data_scientist.causal_baseline as cb
-    import agents.data_scientist.demand_forecasting as df_mod
-    import agents.ml_engineer.drift_monitor as dm
+    import rgm_pipeline.agents.data_scientist.causal_baseline as cb
+    import rgm_pipeline.agents.data_scientist.demand_forecasting as df_mod
+    import rgm_pipeline.agents.ml_engineer.drift_monitor as dm
     monkeypatch.setattr(cb, "DB_PATH", temp_db)
     monkeypatch.setattr(df_mod, "DB_PATH", temp_db)
     monkeypatch.setattr(dm, "DB_PATH", temp_db)

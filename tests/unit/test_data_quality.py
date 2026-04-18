@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from agents.data_engineer.data_quality import DataQualityRunner, DQReport
+from rgm_pipeline.agents.data_engineer.data_quality import DataQualityRunner, DQReport
 
 
 @pytest.fixture()
@@ -18,7 +18,7 @@ def runner() -> DataQualityRunner:
 
 def test_schema_pass(runner, sample_transactions):
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _SchemaChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _SchemaChecker
     _SchemaChecker().check(sample_transactions, "transactions", report)
     errors = [i for i in report.issues if i.severity == "error"]
     assert not errors
@@ -27,7 +27,7 @@ def test_schema_pass(runner, sample_transactions):
 def test_schema_missing_column(runner):
     df = pd.DataFrame({"product_id": ["A"], "volume": [10]})  # faltam colunas
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _SchemaChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _SchemaChecker
     _SchemaChecker().check(df, "transactions", report)
     assert any(i.check == "schema_completeness" for i in report.issues)
 
@@ -38,7 +38,7 @@ def test_schema_missing_column(runner):
 
 def test_null_check_pass(runner, sample_transactions):
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _NullChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _NullChecker
     _NullChecker().check(sample_transactions, "transactions", report)
     errors = [i for i in report.issues if i.severity == "error"]
     assert not errors
@@ -50,7 +50,7 @@ def test_null_check_fails_above_threshold():
         "revenue": range(110),
     })
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _NullChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _NullChecker
     _NullChecker().check(df, "transactions", report)
     assert any(i.check == "null_rate" for i in report.issues)
 
@@ -64,7 +64,7 @@ def test_anomaly_detects_outlier():
     base.append(100_000.0)  # outlier extremo
     df = pd.DataFrame({"volume": base})
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _AnomalyChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _AnomalyChecker
     _AnomalyChecker().check(df, "transactions", report)
     assert any(i.check == "iqr_anomaly" for i in report.issues)
 
@@ -83,7 +83,7 @@ def test_business_rules_negative_volume():
         "margin_pct": [-1.6, 0.4, 0.4],
     })
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _BusinessRulesChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _BusinessRulesChecker
     _BusinessRulesChecker().check(df, "transactions", report)
     assert any(i.check == "positive_volume" for i in report.issues)
 
@@ -98,7 +98,7 @@ def test_business_rules_revenue_consistency():
         "margin_pct": [0.97],
     })
     report = DQReport(table="transactions")
-    from agents.data_engineer.data_quality import _BusinessRulesChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _BusinessRulesChecker
     _BusinessRulesChecker().check(df, "transactions", report)
     assert any(i.check == "revenue_consistency" for i in report.issues)
 
@@ -115,7 +115,7 @@ def test_business_rules_campaign_max_discount():
         "status": ["encerrada"],
     })
     report = DQReport(table="campaigns")
-    from agents.data_engineer.data_quality import _BusinessRulesChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _BusinessRulesChecker
     _BusinessRulesChecker().check(df, "campaigns", report)
     assert any(i.check == "max_discount_rule" for i in report.issues)
 
@@ -132,7 +132,7 @@ def test_business_rules_campaign_date_order():
         "status": ["encerrada"],
     })
     report = DQReport(table="campaigns")
-    from agents.data_engineer.data_quality import _BusinessRulesChecker
+    from rgm_pipeline.agents.data_engineer.data_quality import _BusinessRulesChecker
     _BusinessRulesChecker().check(df, "campaigns", report)
     assert any(i.check == "date_order" for i in report.issues)
 

@@ -15,7 +15,7 @@ import pandas as pd
 from pathlib import Path
 from loguru import logger
 
-from config.settings import MOCK_CONFIG, RAW_DIR, DB_PATH
+from rgm_pipeline.config.settings import MOCK_CONFIG, RAW_DIR, DB_PATH
 
 
 class MockDataGenerator:

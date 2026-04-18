@@ -15,7 +15,7 @@ import shap
 import xgboost as xgb
 from loguru import logger
 
-from config.settings import PROCESSED_DIR
+from rgm_pipeline.config.settings import PROCESSED_DIR
 
 
 @dataclass

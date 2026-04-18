@@ -9,9 +9,9 @@ Orquestra:
 
 from loguru import logger
 
-from agents.data_engineer.mock_generator import MockDataGenerator
-from agents.data_engineer.data_quality import DataQualityRunner
-from agents.data_engineer.access_control import AccessControlService, User, AuthenticationError
+from rgm_pipeline.agents.data_engineer.mock_generator import MockDataGenerator
+from rgm_pipeline.agents.data_engineer.data_quality import DataQualityRunner
+from rgm_pipeline.agents.data_engineer.access_control import AccessControlService, User, AuthenticationError
 
 
 def main() -> None:

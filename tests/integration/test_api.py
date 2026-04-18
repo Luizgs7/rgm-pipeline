@@ -9,8 +9,8 @@ import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
-from agents.ml_engineer.api import app, _state
-from agents.ml_engineer.security import DEFAULT_KEYS
+from rgm_pipeline.agents.ml_engineer.api import app, _state
+from rgm_pipeline.agents.ml_engineer.security import DEFAULT_KEYS
 
 
 @pytest.fixture(scope="module")
@@ -147,8 +147,8 @@ def test_predict_demand_no_model_uses_simulation_fallback(
     sim_path = tmp_path / "demand_simulation.parquet"
     sim_df.to_parquet(sim_path)
 
-    import agents.ml_engineer.api as api_mod
-    import config.settings as s
+    import rgm_pipeline.agents.ml_engineer.api as api_mod
+    import rgm_pipeline.config.settings as s
     original_processed = s.PROCESSED_DIR
     s.PROCESSED_DIR = tmp_path
     api_mod.PROCESSED_DIR = tmp_path

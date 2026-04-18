@@ -20,4 +20,4 @@ EXPOSE 8000
 # Variável de ambiente para evitar buffer de logs
 ENV PYTHONUNBUFFERED=1
 
-CMD ["python", "run_module4.py", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "scripts/run_module4.py", "--host", "0.0.0.0", "--port", "8000"]

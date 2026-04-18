@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from agents.data_scientist.optimizer import CampaignOptimizer, OptimizationResult
+from rgm_pipeline.agents.data_scientist.optimizer import CampaignOptimizer, OptimizationResult
 
 
 @pytest.fixture()
@@ -42,7 +42,7 @@ def simulation_df(sample_transactions) -> pd.DataFrame:
 @pytest.fixture(autouse=True)
 def patch_processed_dir(tmp_path, monkeypatch):
     """Redireciona PROCESSED_DIR para diretório temporário nos testes."""
-    import agents.data_scientist.optimizer as opt_mod
+    import rgm_pipeline.agents.data_scientist.optimizer as opt_mod
     monkeypatch.setattr(opt_mod, "PROCESSED_DIR", tmp_path)
 
 

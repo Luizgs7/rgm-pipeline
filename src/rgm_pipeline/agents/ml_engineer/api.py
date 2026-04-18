@@ -24,7 +24,7 @@ from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
-from agents.ml_engineer.schemas import (
+from rgm_pipeline.agents.ml_engineer.schemas import (
     CampaignGridResponse,
     CampaignItem,
     DemandPredictRequest,
@@ -35,15 +35,15 @@ from agents.ml_engineer.schemas import (
     PipelineRunRequest,
     PipelineRunResponse,
 )
-from agents.ml_engineer.security import (
+from rgm_pipeline.agents.ml_engineer.security import (
     DEFAULT_KEYS,
     RateLimitMiddleware,
     RequestTracingMiddleware,
     require_admin,
     require_api_key,
 )
-from agents.ml_engineer.drift_monitor import DriftMonitor
-from config.settings import DB_PATH, PROCESSED_DIR
+from rgm_pipeline.agents.ml_engineer.drift_monitor import DriftMonitor
+from rgm_pipeline.config.settings import DB_PATH, PROCESSED_DIR
 
 
 # ---------------------------------------------------------------------------
@@ -177,10 +177,10 @@ async def run_pipeline(
 
     try:
         # Importações locais para não bloquear o startup da API
-        from agents.data_scientist.causal_baseline import CausalBaselineEstimator
-        from agents.data_scientist.demand_forecasting import DemandForecaster
-        from agents.data_scientist.optimizer import CampaignOptimizer
-        from agents.data_scientist.explainability import CampaignExplainer
+        from rgm_pipeline.agents.data_scientist.causal_baseline import CausalBaselineEstimator
+        from rgm_pipeline.agents.data_scientist.demand_forecasting import DemandForecaster
+        from rgm_pipeline.agents.data_scientist.optimizer import CampaignOptimizer
+        from rgm_pipeline.agents.data_scientist.explainability import CampaignExplainer
         import sqlite3
 
         # Módulo 2a: Causal

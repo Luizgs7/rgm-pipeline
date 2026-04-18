@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import config.settings as s
-from agents.data_engineer.mock_generator import MockDataGenerator
+import rgm_pipeline.config.settings as s
+from rgm_pipeline.agents.data_engineer.mock_generator import MockDataGenerator
 
 
 @pytest.fixture(scope="module")
@@ -18,7 +18,7 @@ def gen_data(tmp_path_factory):
     s.RAW_DIR.mkdir(parents=True, exist_ok=True)
 
     orig_db = s.DB_PATH
-    import config.settings as cfg
+    import rgm_pipeline.config.settings as cfg
     cfg.DB_PATH = db
 
     gen = MockDataGenerator(seed=7)
