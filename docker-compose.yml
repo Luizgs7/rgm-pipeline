@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  # ── Pipeline (setup único) ───────────────────────────────────────────────
+  pipeline-setup:
+    build: .
+    container_name: rgm-pipeline-setup
+    volumes:
+      - rgm-data:/app/data
+    command: >
+      sh -c "python run_module1.py && python run_module2_3.py"
+    restart: "no"
+
+  # ── API (produção) ────────────────────────────────────────────────────────
+  api:
+    build: .
+    container_name: rgm-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - rgm-data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python run_module4.py --host 0.0.0.0 --port 8000 --workers 2
+    depends_on:
+      pipeline-setup:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  rgm-data:
+    driver: local
