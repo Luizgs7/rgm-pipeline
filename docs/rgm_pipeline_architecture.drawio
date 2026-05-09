@@ -1,0 +1,190 @@
+<mxfile host="app.diagrams.net" version="24.0.0">
+  <diagram name="RGM Pipeline Architecture" id="rgm-architecture-v1">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1447" math="0" shadow="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="11" value="RGM Pipeline — Arquitetura Multi-Agentes" style="text;html=1;strokeColor=none;fillColor=#1E3A5F;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontColor=#ffffff;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="2080" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" value="⚙  Orquestrador: Agnos AI Framework  —  Python 3.10+ · OOP · Clean Code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#005073;strokeColor=#003050;fontColor=#ffffff;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="10" y="75" width="2080" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="13" value="🔧  Agente 1: Engenheiro de Dados  |  src/rgm_pipeline/agents/data_engineer/" style="swimlane;fontStyle=1;align=left;startSize=38;strokeColor=#D97706;fillColor=#FFF7ED;fontSize=13;fontColor=#92400E;perimeterSpacing=4;rounded=1;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="10" y="127" width="2080" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="14" value="&lt;b&gt;MockDataGenerator&lt;/b&gt;&#10;mock_generator.py&#10;&#10;Gera banco SQLite realista&#10;• 20 produtos · 10 lojas&#10;• 80 campanhas · 730 dias" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#D97706;fontSize=10;fontColor=#78350F;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="30" y="177" width="370" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="15" value="&lt;b&gt;DataQualityRunner&lt;/b&gt;&#10;data_quality.py&#10;&#10;• Validação de schema&#10;• Checagem de nulos (&amp;lt;5%)&#10;• Anomalias via IQR (×3)&#10;• Regras de negócio RGM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#D97706;fontSize=10;fontColor=#78350F;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="430" y="177" width="370" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="16" value="&lt;b&gt;AccessControlService&lt;/b&gt;&#10;access_control.py&#10;&#10;• RBAC: admin · analyst · viewer&#10;• Mascaramento de campos PII&#10;• Log de auditoria&#10;• Controle por tabela/operação" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#D97706;fontSize=10;fontColor=#78350F;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="830" y="177" width="370" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="17" value="&lt;b&gt;config/settings.py&lt;/b&gt;&#10;&#10;MOCK_CONFIG&#10;DQ_CONFIG&#10;ACCESS_ROLES&#10;DB_PATH · PROCESSED_DIR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E5E7EB;strokeColor=#6B7280;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="177" width="280" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="18" value="▶ run_module1.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A5F;strokeColor=#1E3A5F;fontSize=9;fontColor=#ffffff;align=center;dashed=1;dashPattern=6 3;" vertex="1" parent="1">
+          <mxGeometry x="1550" y="207" width="200" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="19" value="SQLite Database&#10;rgm_database.db&#10;&#10;products · stores · campaigns&#10;transactions · uplift_metrics" style="shape=mxgraph.flowchart.database;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#4B5563;fontSize=11;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="770" y="437" width="560" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="20" value="🧬  Agente 2: Cientista de Dados  |  src/rgm_pipeline/agents/data_scientist/" style="swimlane;fontStyle=1;align=left;startSize=38;strokeColor=#1D4ED8;fillColor=#EFF6FF;fontSize=13;fontColor=#1E3A8A;perimeterSpacing=4;rounded=1;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="10" y="557" width="2080" height="310" as="geometry"/>
+        </mxCell>
+        <mxCell id="21" value="&lt;b&gt;CausalBaselineEstimator&lt;/b&gt;&#10;causal_baseline.py&#10;&#10;• Painel produto-loja-mês&#10;• Estimador DiD&#10;• Regressão linear com FE&#10;• Contrafactuais granulares" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#1D4ED8;fontSize=10;fontColor=#1E3A8A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="30" y="607" width="460" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="22" value="&lt;b&gt;DemandForecaster&lt;/b&gt;&#10;demand_forecasting.py&#10;&#10;• XGBoost (300 trees, depth=6)&#10;• TimeSeriesSplit (k=3)&#10;• Features: lags, MA, calendário,&#10;  discount_pct, produto/loja enc.&#10;• Simulação: 10/20/30/40% desc." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#1D4ED8;fontSize=10;fontColor=#1E3A8A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="607" width="460" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="23" value="&lt;b&gt;CampaignOptimizer&lt;/b&gt;&#10;optimizer.py&#10;&#10;• ILP Binário (PuLP / CBC)&#10;• Max: Σ net_margin × xᵢ&#10;• Restrições: verba total,&#10;  sobreposição por produto&#10;• Grade de campanhas prescritiva" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#1D4ED8;fontSize=10;fontColor=#1E3A8A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="607" width="460" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="24" value="&lt;b&gt;CampaignExplainer&lt;/b&gt;&#10;explainability.py&#10;&#10;• SHAP TreeExplainer&#10;• Importância de features&#10;• Score de Confiança composto&#10;  (accuracy + stability + coverage)&#10;• Explicações textuais" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#1D4ED8;fontSize=10;fontColor=#1E3A8A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="607" width="460" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="25" value="▶ run_module2_3.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A5F;strokeColor=#1E3A5F;fontSize=9;fontColor=#ffffff;align=center;dashed=1;dashPattern=6 3;" vertex="1" parent="1">
+          <mxGeometry x="30" y="797" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="26" value="📄 causal_baseline.parquet" style="shape=mxgraph.flowchart.stored_data;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=9;fontColor=#0C4A6E;" vertex="1" parent="1">
+          <mxGeometry x="30" y="887" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="27" value="📄 demand_simulation.parquet" style="shape=mxgraph.flowchart.stored_data;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=9;fontColor=#0C4A6E;" vertex="1" parent="1">
+          <mxGeometry x="505" y="887" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="28" value="📄 campaign_grid.parquet" style="shape=mxgraph.flowchart.stored_data;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=9;fontColor=#0C4A6E;" vertex="1" parent="1">
+          <mxGeometry x="980" y="887" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="29" value="📄 campaign_explanations.parquet" style="shape=mxgraph.flowchart.stored_data;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=9;fontColor=#0C4A6E;" vertex="1" parent="1">
+          <mxGeometry x="1455" y="887" width="440" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="30" value="⚙  Agente 3: Engenheiro de ML  |  src/rgm_pipeline/agents/ml_engineer/" style="swimlane;fontStyle=1;align=left;startSize=38;strokeColor=#15803D;fillColor=#F0FDF4;fontSize=13;fontColor=#14532D;perimeterSpacing=4;rounded=1;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="10" y="967" width="2080" height="310" as="geometry"/>
+        </mxCell>
+        <mxCell id="31" value="&lt;b&gt;FastAPI Application&lt;/b&gt;&#10;api.py  |  :8000&#10;&#10;GET  /health&#10;POST /pipeline/run  🔒admin&#10;GET  /campaigns/grid  🔒analyst&#10;POST /predict/demand  🔒analyst&#10;POST /monitor/drift  🔒admin&#10;GET  /monitor/drift/latest  🔒admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;fontSize=10;fontColor=#14532D;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1017" width="430" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="32" value="&lt;b&gt;Security&lt;/b&gt;&#10;security.py&#10;&#10;• API Key (X-API-Key header)&#10;• Rate limit: 10 req/s por IP&#10;  (burst até 60)&#10;• Roles: admin · analyst&#10;• Request tracing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;fontSize=10;fontColor=#14532D;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1017" width="380" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="33" value="&lt;b&gt;DriftMonitor&lt;/b&gt;&#10;drift_monitor.py&#10;&#10;• Evidently (primary)&#10;• Fallback: KS-test / chi²&#10;• Data Drift detection&#10;• Model Drift detection&#10;• Relatórios em JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;fontSize=10;fontColor=#14532D;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="900" y="1017" width="380" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="34" value="&lt;b&gt;Pydantic Schemas&lt;/b&gt;&#10;schemas.py&#10;&#10;• PipelineRunRequest&#10;• DemandPredictRequest&#10;• CampaignGridResponse&#10;• HealthResponse&#10;• DriftReportResponse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;fontSize=10;fontColor=#14532D;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="1017" width="380" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="35" value="▶ run_module4.py&#10;──────&#10;--reload&#10;--host 0.0.0.0&#10;--port 8000&#10;--workers 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E3A5F;strokeColor=#1E3A5F;fontSize=9;fontColor=#ffffff;align=center;dashed=1;dashPattern=6 3;" vertex="1" parent="1">
+          <mxGeometry x="1720" y="1017" width="200" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="36" value="📖 Swagger UI&#10;localhost:8000/docs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#374151;fontSize=10;fontColor=#111827;align=center;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1302" width="250" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="37" value="🐳 Docker Compose&#10;docker-compose up" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#374151;fontSize=10;fontColor=#111827;align=center;" vertex="1" parent="1">
+          <mxGeometry x="305" y="1302" width="250" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="38" value="📊 Streamlit Dashboard&#10;localhost:8501" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#99F6E4;strokeColor=#0F766E;fontSize=10;fontColor=#134E4A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1302" width="280" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="39" value="🌐 REST Clients&#10;(curl · Postman · SDK)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#374151;fontSize=10;fontColor=#111827;align=center;" vertex="1" parent="1">
+          <mxGeometry x="885" y="1302" width="280" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="40" value="🔬  Módulo Experimental" style="swimlane;fontStyle=1;align=left;startSize=38;strokeColor=#7C3AED;fillColor=#FAF5FF;fontSize=13;fontColor=#5B21B6;perimeterSpacing=4;rounded=1;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="1730" y="877" width="360" height="430" as="geometry"/>
+        </mxCell>
+        <mxCell id="41" value="&lt;b&gt;Jupyter Notebook&lt;/b&gt;&#10;experiment_xgboost_vs_llm&#10;_forecaster.ipynb&#10;&#10;XGBoost vs LLM&#10;WMAPE · Bias · RMSE · R²&#10;SHAP + Chain-of-Thought" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1750" y="927" width="320" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="42" value="&lt;b&gt;MockLLMForecaster&lt;/b&gt;&#10;&#10;Simulação sem API key&#10;Elasticidade calibrada&#10;Reasoning sintético" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1750" y="1107" width="150" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="43" value="&lt;b&gt;RealLLMForecaster&lt;/b&gt;&#10;&#10;Anthropic API&#10;Claude Sonnet 4.6&#10;Cache parquet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#7C3AED;fontSize=10;fontColor=#4C1D95;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1920" y="1107" width="150" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="44" value="☁  Anthropic Claude API&#10;claude-sonnet-4-6" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=11;fontStyle=1;fontColor=#4C1D95;" vertex="1" parent="1">
+          <mxGeometry x="1790" y="1222" width="240" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="45" value="gera tabelas" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="14" target="19" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="46" value="valida" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="15" target="19" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="47" value="controla acesso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="16" target="19" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="48" value="lê transações" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="19" target="21" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="49" value="lê transações" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="19" target="22" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="21" target="26" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="51" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="22" target="27" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="23" target="28" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="24" target="29" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="54" value="serve resultados" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="27" target="31" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="55" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="28" target="31" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="56" value="autentica" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="31" target="32" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="57" value="monitora" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="31" target="33" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="58" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="31" target="36" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="31" target="37" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="60" value="dados" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="31" target="38" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="61" value="HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="31" target="39" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="62" value="compara modelos" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 3;fontSize=9;fontColor=#7C3AED;" edge="1" source="22" target="41" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="63" value="usa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 3;fontSize=9;fontColor=#7C3AED;" edge="1" source="27" target="41" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="64" value="modo real" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 3;fontSize=9;fontColor=#7C3AED;" edge="1" source="43" target="44" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="65" value="orquestra" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=9;fontColor=#374151;fontStyle=2;" edge="1" source="12" target="13" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="66" value="&lt;b&gt;Legenda:&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1302" width="80" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="67" value="🔒 Requer autenticação" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1322" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="68" value="▶ Entry point de execução" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1340" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="69" value="📄 Arquivo Parquet processado" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="1322" width="220" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="70" value="- - - Fluxo experimental (notebook)" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#7C3AED;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="1340" width="250" height="18" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
